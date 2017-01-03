@@ -9,6 +9,7 @@ class Device(models.Model):
         temp = models.DecimalField(max_digits=4, decimal_places=1)
         hum = models.DecimalField(max_digits=4, decimal_places=1)
         bar = models.DecimalField(max_digits=5, decimal_places=1)
+        #id = models.AutoField(primary_key=True)
 
         def __str__(self):
             return self.device

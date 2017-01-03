@@ -1,0 +1,24 @@
+{% extends 'app.html' %}
+{% load staticfiles %}
+
+  <!-- Content -->
+  {% block content %}
+
+  <div class="container" id="test">
+    <h1>blik in the block</h1>
+    <div class="row">
+      {% for device in devices %}
+        <div class="col-md-4">
+          <a href="/devices/{{ device.id }}/">
+            <p>Device id: {{ device.device }}</p>
+            <p>Time of data: {{ device.time_stamp }}</p>
+            <p>Temperature: {{ device.temp }}°C</p>
+            <p>Humidity: {{ device.hum }}%</p>
+            <p>Pressure: {{ device.bar }}Pa</p>
+          </a>
+          <br />
+        </div>
+      {% endfor %}
+    </div>
+
+    {% endblock %}

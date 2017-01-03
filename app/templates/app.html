@@ -38,18 +38,12 @@
     <![endif]-->
 
 </head>
+
+
 <body>
-  <div class="container" id="test">
-    <h1>blik in the block</h1>
-    {% for device in devices %}
-      <p>Device id: {{ device.device }}</p>
-      <p>Time of data: {{ device.time_stamp }}</p>
-      <p>Temperature: {{ device.temp }}°C</p>
-      <p>Humidity: {{ device.hum }}%</p>
-      <p>Pressure: {{ device.bar }}Pa</p>
-      <br />
-    {% endfor %}
-  </div>
+  <!-- Content -->
+    {% block content %}
+    {% endblock %}
 
   <!-- jQuery -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

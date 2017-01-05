@@ -38,42 +38,18 @@
     <![endif]-->
 
 </head>
-
-
 <body>
-  <!-- App Header -->
-  <header>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <a class="navbar-brand page-scroll" href="/">blik</a>
-        <ul class="nav navbar-nav">
-          <!-- "active"-class must toggle -->
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/devices/">Devices</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/locations/">Locations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link dropdown-toggle text-muted" class="panel-username" href="/user/{{ user.username }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/user/{{ user.username }}">Profile</a>
-              <a class="dropdown-item" href="/logout/">Logout</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Get rid of soon!!! -->
-  <div class="container"><br><br></div>
-
-  <!-- Content -->
-    {% block content %}
-    {% endblock %}
+  <div class="container" id="test">
+    <h1>blik in the block</h1>
+    {% for device in devices %}
+      <p>Device id: {{ device.device }}</p>
+      <p>Time of data: {{ device.time_stamp }}</p>
+      <p>Temperature: {{ device.temp }}°C</p>
+      <p>Humidity: {{ device.hum }}%</p>
+      <p>Pressure: {{ device.bar }}Pa</p>
+      <br />
+    {% endfor %}
+  </div>
 
   <!-- jQuery -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
@@ -93,9 +69,6 @@
 
   <!-- Theme JavaScript -->
   <script src="{% static 'js/agency.min.js' %}"></script>
-
-  <!-- Custom JavaScript -->
-  <script src="{% static 'js/app.js' %}"></script>
 </body>
 
 </html>

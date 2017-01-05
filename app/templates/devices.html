@@ -16,6 +16,13 @@
             <p>Humidity: {{ device.hum }}%</p>
             <p>Pressure: {{ device.bar }}Pa</p>
           </a>
+          <button id="focus" device-id="{{ device.id }}" class="btn btn-mini btn-danger glyphicon glyphicon-search" type="button">
+            {% if device.focus == False %}
+              Not Focused
+            {% else %}
+              Focused
+            {% endif %}
+          </button>
           <br />
         </div>
       {% endfor %}

@@ -1,13 +1,12 @@
-function getCookie(name){
+function getCookie(name) {
   var cookieValue = null;
-  if (document.cookie && document.cookie != ""){
-    var cookies = document.cookie.split(";");
-    for (var i=0; i < cookies.length; i++){
+  if (document.cookie && document.cookie != '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
       var cookie = jQuery.trim(cookies[i]);
-      if (cookie.substring(0, name.lenght + 1) == (name + "=")){
-        cookie.Value = decodeURIComponent(
-          cookie.substring(name.length + 1)
-        );
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) == (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
         break;
       }
     }
@@ -15,11 +14,12 @@ function getCookie(name){
   return cookieValue;
 }
 
-function csrfSafeMethod(method){
+function csrfSafeMethod(method) {
+  // these HTTP methods do not require CSRF protection
   return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-var csrftoken = getCookie("csrftoken");
+var csrftoken = getCookie('csrftoken');
 
 $.ajaxSetup({
   beforeSend: function(xhr, settings){
@@ -31,13 +31,12 @@ $.ajaxSetup({
 
 $("button").on("click", function(event){
   event.preventDefault();
-  var element = $(this);
   $.ajax({
     url : "/focus_device/",
     type : "POST",
-    data : { device_id : element.attr("device-id")},
-    success : function(response){
-      element.html(response + " ");
+    data : { device_id : $(this).attr("device-id")},
+    success : function(data){
+      $(this).html(data + " ");
     }
   });
 });

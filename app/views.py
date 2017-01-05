@@ -1,10 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, JsonResponse
+from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.forms import UserCreationForm
+from django.core.urlresolvers import reverse
+
 from .forms import LoginForm
 from .models import Device, User
 
 # Create your views here.
 def index(request):
+    # strongly a mockup
     devices = Device.objects.all()
     return render(request, "devices.html", {"devices":devices})
 
@@ -16,6 +21,17 @@ def device(request, device_id):
     device = Device.objects.get(id=device_id)
     return render(request, "device.html", {"device":device})
 
+def locations(request):
+    # obviously a mockup
+    locations = Device.objects.all()
+    return render(request, "devices.html", {"device":locations})
+
+def location(request, location_id):
+    # obviously a mockup
+    location = Device.objects.get(id=location_id)
+    return render(request, "device.html", {"device":location})
+
+# User Relevant views
 def user(request, username):
     user = User.objects.get(username=username)
     # show settings
@@ -34,6 +50,7 @@ def login_view(request):
                     login(request, user)
                     return HttpResponseRedirect("/")
                 else:
+                    # Raises Error bei inkorrekter Eingabe, muss gefixt werden.
                     print("There was a problem activating your account.")
             else:
                 print("The username or password were incorrect.")
@@ -43,9 +60,14 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect("/login/")
 
+# Further Website Features
 def focus_device(request):
+    """
+    POSTs an attribute 'focused' to the device. With the focus attribute, a prioritied list of devices shall be created.
+    It works together with an ajax function in app.js and some html in devices.html.
+    """
     device_id = request.POST.get("device_id", None)
     if (device_id):
         device = Device.objects.get(id=int(device_id))

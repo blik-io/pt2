@@ -16,4 +16,8 @@ class Device(models.Model):
         def __str__(self):
             return self.device
 
+# class Location(models.Model):
+
+# class DataPoints(models.Model):
+
 # class User automatically created

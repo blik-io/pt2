@@ -4,10 +4,11 @@ from . import views
 urlpatterns = [
     # Main app
     url(r'^$', views.index, name = "index"),
+    url(r'^dashboard/$', views.index, name = "index"),
     url(r'^devices/$', views.devices, name = "devices"),
     url(r'^devices/([0-9]+)/$', views.device, name = "device"),
-    #url(r'^locations/$', views.locations, name = "locations"),
-    #ulr(r'^locations/([0-9]+)/$', views.location, name = "location"),
+    url(r'^locations/$', views.locations, name = "locations"),
+    url(r'^locations/([0-9]+)/$', views.location, name = "location"),
 
     # User management
     url(r'^user/(\w+)/$', views.user, name="user"),

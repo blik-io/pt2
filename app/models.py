@@ -11,12 +11,15 @@ class Device(models.Model):
         hum = models.DecimalField(max_digits=4, decimal_places=1)
         bar = models.DecimalField(max_digits=5, decimal_places=1)
         #id = models.AutoField(primary_key=True)
+        #location = models.ForeignField("Location", on_delete=models.SET_NULL)
         focus = models.BooleanField(default=False)
 
         def __str__(self):
             return self.device
 
-# class Location(models.Model):
+class Location(models.Model):
+        slug = models.SlugField(max_length=40)
+        focus = models.BooleanField(default=False)
 
 # class DataPoints(models.Model):
 

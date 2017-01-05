@@ -6,12 +6,12 @@ urlpatterns = [
     url(r'^$', views.index, name = "index"),
     url(r'^dashboard/$', views.index, name = "index"),
     url(r'^devices/$', views.devices, name = "devices"),
-    url(r'^devices/([0-9]+)/$', views.device, name = "device"),
+    url(r'^devices/([0-9]+)/', views.device, name = "device"),
     url(r'^locations/$', views.locations, name = "locations"),
-    url(r'^locations/([0-9]+)/$', views.location, name = "location"),
+    url(r'^locations/([a-z0-9-]+)/', views.location, name = "location"),
 
     # User management
-    url(r'^user/(\w+)/$', views.user, name="user"),
+    url(r'^user/(\w+)/', views.user, name="user"),
     url(r'^login/$', views.login_view, name="login"),
     url(r'^logout/$', views.logout_view, name="logout"),
 

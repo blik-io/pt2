@@ -26,10 +26,10 @@ def locations(request):
     locations = Device.objects.all()
     return render(request, "devices.html", {"device":locations})
 
-def location(request, location_id):
+def location(request, slug):
     # obviously a mockup
-    location = Device.objects.get(id=location_id)
-    return render(request, "device.html", {"device":location})
+    location = Location.objects.get(slug=slug)
+    return render(request, "location.html", {"location":location})
 
 # User Relevant views
 def user(request, username):

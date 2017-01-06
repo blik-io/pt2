@@ -29,14 +29,15 @@ $.ajaxSetup({
   }
 });
 
-$("button").on("click", function(event){
+$("button").click(function(event){
   event.preventDefault();
+  var this_button=$(this);
   $.ajax({
     url : "/focus_device/",
     type : "POST",
-    data : { device_id : $(this).attr("device-id")},
-    success : function(data){
-      $(this).html(data + " ");
+    data : { device_id : this_button.attr("device-id")},
+    success : function(focus){
+      this_button.html(focus==="1" ? "Focused": "Not Focused");
     }
   });
 });

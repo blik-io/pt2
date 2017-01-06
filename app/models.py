@@ -17,6 +17,10 @@ class Device(models.Model):
         def __str__(self):
             return self.device
 
+        def toggle_focus(self):
+            self.focus = not self.focus
+            return self.focus
+
 class Location(models.Model):
         slug = models.SlugField(max_length=40)
         focus = models.BooleanField(default=False)

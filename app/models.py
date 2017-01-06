@@ -2,29 +2,46 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
-class Device(models.Model):
-        device = models.IntegerField()
+class DataPoint(models.Model):
+        device_id = models.ForeignKey("Device", null=True, on_delete=models.SET_NULL)
         time_stamp = models.IntegerField()
+        loc = models.CharField(max_length=14)
         temp = models.DecimalField(max_digits=4, decimal_places=1)
         hum = models.DecimalField(max_digits=4, decimal_places=1)
         bar = models.DecimalField(max_digits=5, decimal_places=1)
-        #id = models.AutoField(primary_key=True)
-        #location = models.ForeignField("Location", on_delete=models.SET_NULL)
-        focus = models.BooleanField(default=False)
+        lux = models.DecimalField(max_digits=5, decimal_places=1)
 
-        def __str__(self):
-            return self.device
+class Device(models.Model):
+        #id = models.AutoField(primary_key=True)
+        location_id = models.ForeignKey("Location", null=True, on_delete=models.SET_NULL)
+        focus = models.BooleanField(default=False)
 
         def toggle_focus(self):
             self.focus = not self.focus
             return self.focus
 
+        def __str__(self):
+            return "blik unit #" + str(self.id)
+
 class Location(models.Model):
-        slug = models.SlugField(max_length=40)
+        name = models.CharField(max_length=40)
+        slug = models.SlugField(max_length=40, unique=True)
+        allowed_users = models.ManyToManyField(User)
         focus = models.BooleanField(default=False)
 
-# class DataPoints(models.Model):
+        def toggle_focus(self):
+            self.focus = not self.focus
+            return self.focus
 
-# class User automatically created
+        def save(self, *args, **kwargs):
+            if not self.pk:
+                slug = slugify(self.name)
+            super(Location, self).save(*args, **kwargs)
+
+        def __str__(self):
+            return self.name
+
+# Class User automatically created

@@ -17,7 +17,6 @@
             <p>Pressure: {{ device.bar }}Pa</p>
           </a>
           <button device-id="{{ device.id }}" class="btn btn-mini btn-danger glyphicon glyphicon-search" type="button">
-            <!-- Doesn't toggle in the frontend! -->
             {% if device.focus == False %}
               Not Focused
             {% else %}

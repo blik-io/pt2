@@ -1,45 +1,46 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 
 from .forms import LoginForm
-from .models import Device, User
+from .models import User, DataPoint, Device, Location
+from .access_tests import location_test, device_test, user_test
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
+@login_required
 def index(request):
     # strongly a mockup
     devices = Device.objects.all()
     return render(request, "devices.html", {"devices":devices})
 
-@login_required(redirect_field_name='login')
+@login_required
 def devices(request):
     devices = Device.objects.all()
     return render(request, "devices.html", {"devices":devices})
 
-@login_required(redirect_field_name='login')
-#@permission_required("perm")
+@login_required
+#@user_passes_test(device_test)
 def device(request, device_id):
     device = Device.objects.get(id=device_id)
     return render(request, "device.html", {"device":device})
 
-@login_required(redirect_field_name='login')
+@login_required
 def locations(request):
     # obviously a mockup
-    locations = Device.objects.all()
+    locations = Location.objects.all()
     return render(request, "devices.html", {"device":locations})
 
-@login_required(redirect_field_name='login')
-#@permission_required("perm")
+@login_required
+#@user_passes_test(location_test)
 def location(request, slug):
     # obviously a mockup
     location = Location.objects.get(slug=slug)
     return render(request, "location.html", {"location":location})
 
-@login_required(redirect_field_name='login')
+@login_required
 def alerts(request):
     # obviously a mockup
     request_user = request.user.id
@@ -50,8 +51,7 @@ def alerts(request):
         return redirect(reverse("login", args=[]))
 
 # User Relevant views
-@login_required(redirect_field_name='login')
-#@permission_required("perm")
+@login_required
 def user(request, username):
     user = User.objects.get(username=username)
     # show settings

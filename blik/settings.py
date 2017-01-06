@@ -32,12 +32,20 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'app',
+    #'www',
+    #'blog',
+    #'intra',
+    #'developers',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'social_django',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -63,6 +71,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -113,6 +124,27 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Social authentification
+AUTHENTIFICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social.backends.google.GoogleOAuth2Backend',
+    'social.backends.facebook.FacebookBackend',
+    'social.backends.contrib.github.GithubBackend'
+)
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
+SOCIAL_AUTH_LOGIN_ERROR_URL = "/"
+SOCIAL_AUTH_LOGIN_LOGIN_URL = "/login/"
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = "/logout/"
+
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+#SOCIAL_AUTH_FACEBOOK_KEY = ''
+#SOCIAL_AUTH_FACEBOOK_SECRET = ''
+#SOCIAL_AUTH_GITHUB_KEY = ''
+#SOCIAL_AUTH_GITHUB_SECRET = ''
 
 
 # Static files (CSS, JavaScript, Images)

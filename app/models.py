@@ -15,7 +15,6 @@ class DataPoint(models.Model):
         lux = models.DecimalField(max_digits=5, decimal_places=1)
 
 class Device(models.Model):
-        #id = models.AutoField(primary_key=True)
         location_id = models.ForeignKey("Location", null=True, on_delete=models.SET_NULL)
         focus = models.BooleanField(default=False)
 
@@ -28,7 +27,7 @@ class Device(models.Model):
 
 class Location(models.Model):
         name = models.CharField(max_length=40)
-        slug = models.SlugField(max_length=40, unique=True)
+        slug = models.SlugField(max_length=40, blank=True, unique=True)
         allowed_users = models.ManyToManyField(User)
         focus = models.BooleanField(default=False)
 

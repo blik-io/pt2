@@ -22,6 +22,8 @@ class Device(models.Model):
             self.focus = not self.focus
             return self.focus
 
+        #braucht eine State funktion für den aktuellen Zustand
+        
         def __str__(self):
             return "blik unit #" + str(self.id)
 

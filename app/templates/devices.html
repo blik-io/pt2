@@ -4,14 +4,15 @@
   <!-- Content -->
   {% block content %}
 
-  <div class="container" id="test">
-    <h1>blik in the block</h1>
-    <div class="row">
+  <section class="container" id="test">
+    <h1>Your devices:</h1>
+    <div class="row focus-panel">
       {% for device in devices %}
         <div class="col-md-4">
+          <div class="focus-box">
           <a href="{% url 'device' device.id %}">
-            <p>Device id: {{ device.device }}</p>
-            <p>Time of data: {{ device.time_stamp }}</p>
+            <p>Device id: {{ device.id }}</p>
+            <p>Location: {{ device.location }}</p>
             <p>Temperature: {{ device.temp }}°C</p>
             <p>Humidity: {{ device.hum }}%</p>
             <p>Pressure: {{ device.bar }}Pa</p>
@@ -23,9 +24,9 @@
               Focused
             {% endif %}
           </button>
-          <br />
+        </div>
         </div>
       {% endfor %}
-    </div>
+    </section>
 
     {% endblock %}

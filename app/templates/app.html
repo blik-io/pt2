@@ -18,14 +18,11 @@
     <title>blik | A demo page</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap-flex.min.css' %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
 
     <!-- Theme CSS -->
     <link href="{% static 'css/agency.css' %}" rel="stylesheet">
@@ -42,34 +39,37 @@
 
 <body>
   <!-- App Header -->
-  <header>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <a class="navbar-brand page-scroll" href="/">blik</a>
-        <ul class="nav navbar-nav">
-          <!-- "active"-class must toggle -->
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/devices/">Devices</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/locations/">Locations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link dropdown-toggle text-muted" class="panel-username" href="/user/{{ user.username }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/user/{{ user.username }}">Profile</a>
-              <a class="dropdown-item" href="/logout/">Logout</a>
-            </div>
-          </li>
-        </ul>
+        <button class="btn btn-primary btn-toggle hidden-md-up float-xs-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fa fa-bars"></i></button>
+        <!-- Clearfix with a utility class added to allow for better navbar responsiveness. -->
+        <div class="clearfix hidden-md-up"></div>
+        <div class="collapse navbar-toggleable-sm" id="navbarResponsive">
+            <ul class="nav navbar-nav float-md-right">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/devices/">Devices</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/locations/">Locations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link dropdown-toggle text-muted" class="panel-username" href="/user/{{ user.username }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/user/{{ user.username }}">Profile</a>
+                  <a class="dropdown-item" href="/logout/">Logout</a>
+                </div>
+              </li>
+            </ul>
+        </div>
       </div>
     </nav>
+  <header>
   </header>
-  <!-- Get rid of soon!!! -->
-  <div class="container"><br><br></div>
+  
 
   <!-- Content -->
     {% block content %}

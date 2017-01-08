@@ -4,19 +4,27 @@
   <!-- Content -->
   {% block content %}
 
-  <div class="container" id="test">
-    <h1>blik in the block</h1>
-    <div class="row">
-        <div class="col-md-4">
-          <a href="/devices/{{ device.id }}/">
-            <p>Device id: {{ device.device }}</p>
-            <p>Time of data: {{ device.time_stamp }}</p>
-            <p>Temperature: {{ device.temp }}°C</p>
-            <p>Humidity: {{ device.hum }}%</p>
-            <p>Pressure: {{ device.bar }}Pa</p>
-          </a>
-          <br />
-        </div>
-    </div>
+  <section class="container" id="test">
+    <h1>Device #{{ device.id }}</h1>
+    <div class="row focus-panel">
+      <div class="col-md-12">
+        <div class="focus-box">
+        <a href="{% url 'device' device.id %}">
+          <p>Device id: {{ device.id }}</p>
+          <p>Location: {{ device.location }}</p>
+          <p>Temperature: {{ device.temp }}°C</p>
+          <p>Humidity: {{ device.hum }}%</p>
+          <p>Pressure: {{ device.bar }}Pa</p>
+        </a>
+        <button device-id="{{ device.id }}" class="btn btn-mini btn-danger glyphicon glyphicon-search" type="button">
+          {% if device.focus == False %}
+            Not Focused
+          {% else %}
+            Focused
+          {% endif %}
+        </button>
+      </div>
+      </div>
+    </section>
 
     {% endblock %}

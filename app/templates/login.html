@@ -4,13 +4,14 @@
   <!-- Content -->
   {% block content %}
 
-  <div class="container" id="test">
-    <!-- Please rebuild using Flexbox -->
-    <h1>Login</h1>
-    <form method="post" action=".">
+  <section class="container login" id="login">
+    <form class="focus-box login" method="post" action=".">
+      <h1>Login</h1>
+      <div class="container login login-form">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" value="Login" />
-    </form>
+    </div>
+      <input class="btn btn-primary" type="submit" value="Login" />
+    </section>
 
     {% endblock %}

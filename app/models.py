@@ -6,7 +6,7 @@ from django.utils.text import slugify
 
 # Create your models here.
 class DataPoint(models.Model):
-        device_id = models.ForeignKey("Device", null=True, on_delete=models.SET_NULL)
+        device = models.ForeignKey("Device", null=True, on_delete=models.SET_NULL)
         time_stamp = models.IntegerField()
         loc = models.CharField(max_length=14)
         temp = models.DecimalField(max_digits=4, decimal_places=1)
@@ -15,7 +15,7 @@ class DataPoint(models.Model):
         lux = models.DecimalField(max_digits=5, decimal_places=1)
 
 class Device(models.Model):
-        location_id = models.ForeignKey("Location", null=True, on_delete=models.SET_NULL)
+        location = models.ForeignKey("Location", null=True, on_delete=models.SET_NULL)
         focus = models.BooleanField(default=False)
 
         def toggle_focus(self):
@@ -23,7 +23,7 @@ class Device(models.Model):
             return self.focus
 
         #braucht eine State funktion für den aktuellen Zustand
-        
+
         def __str__(self):
             return "blik unit #" + str(self.id)
 

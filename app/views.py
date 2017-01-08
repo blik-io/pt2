@@ -14,7 +14,7 @@ from .access_tests import location_test, device_test, user_test
 def index(request):
     # strongly a mockup
     devices = Device.objects.all()
-    return render(request, "devices.html", {"devices":devices})
+    return render(request, "dashboard.html", {"devices":devices})
 
 @login_required
 def devices(request):

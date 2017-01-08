@@ -18,4 +18,7 @@ urlpatterns = [
 
     # Focus button
     url(r'focus_device/$', views.focus_device, name="focus_device"),
+
+    # Auto fill with randomizer
+    url(r'utilities/randomizer/$', views.auto_fill, name="auto_fill"),
 ]

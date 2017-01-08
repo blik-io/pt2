@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 
+from .randomizer import randomizer_main
 from .forms import LoginForm
 from .models import User, DataPoint, Device, Location
 from .access_tests import location_test, device_test, user_test
@@ -95,3 +96,7 @@ def focus_device(request):
             focus = int(device.toggle_focus())
             device.save()
     return HttpResponse(focus)
+
+def auto_fill(request):
+    randomizer_main()
+    return redirect(reverse("dashboard", args=[]))

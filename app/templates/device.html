@@ -5,26 +5,30 @@
   {% block content %}
 
   <section class="container" id="test">
-    <h1>Device #{{ device.id }}</h1>
+    <h1>Device #{{ device.id }} at {{ device.location }}</h1>
     <div class="row focus-panel">
       <div class="col-md-12">
-        <div class="focus-box">
-        <a href="{% url 'device' device.id %}">
-          <p>Device id: {{ device.id }}</p>
-          <p>Location: {{ device.location }}</p>
-          <p>Temperature: {{ device.temp }}°C</p>
-          <p>Humidity: {{ device.hum }}%</p>
-          <p>Pressure: {{ device.bar }}Pa</p>
-        </a>
-        <button device-id="{{ device.id }}" class="btn btn-mini btn-danger glyphicon glyphicon-search" type="button">
-          {% if device.focus == False %}
-            Not Focused
-          {% else %}
-            Focused
-          {% endif %}
-        </button>
+          <div class="focus-box">
+            <p>Device ID: {{ device.id }}</p>
+            <a href="{% url 'location' associated_location.slug %}">
+              <p>Location: {{ device.location }}</p>
+            </a>
+            <p>Current data for the device:</p>
+            <p>Location: {{ device.current_loc }} (x,y,z)</p>
+            <p>Temperature: {{ device.current_temp }}°C</p>
+            <p>Humidity: {{ device.current_hum }}%</p>
+            <p>Pressure: {{ device.current_bar }} Pa</p>
+            <p>Bightness: {{ device.current_lux }} Lux</p>
+            <button object-id="{{ device.id }}" class="btn btn-mini btn-danger glyphicon glyphicon-search device-focus" type="button">
+              {% if device.focus == False %}
+                Not Focused
+              {% else %}
+                Focused
+              {% endif %}
+            </button>
+          </div>
       </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    {% endblock %}
+  {% endblock %}

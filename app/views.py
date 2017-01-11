@@ -26,20 +26,20 @@ def devices(request):
 #@user_passes_test(device_test)
 def device(request, device_id):
     device = Device.objects.get(id=device_id)
-    return render(request, "device.html", {"device":device})
+    associated_location = Location.objects.get(id=device.location_id)
+    return render(request, "device.html", {"device":device, "associated_location":associated_location})
 
 @login_required
 def locations(request):
-    # obviously a mockup
     locations = Location.objects.all()
-    return render(request, "devices.html", {"device":locations})
+    return render(request, "locations.html", {"locations":locations})
 
 @login_required
 #@user_passes_test(location_test)
 def location(request, slug):
-    # obviously a mockup
     location = Location.objects.get(slug=slug)
-    return render(request, "location.html", {"location":location})
+    associated_devices = Device.objects.filter(location_id=location.id)
+    return render(request, "location.html", {"location":location, "associated_devices":associated_devices})
 
 @login_required
 def alerts(request):

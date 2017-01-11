@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'guardian',
     'social_django',
     'social.apps.django_app.default',
 ]
@@ -129,6 +130,7 @@ USE_TZ = True
 # Social authentification
 AUTHENTIFICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
     'social.backends.google.GoogleOAuth2Backend',
     'social.backends.facebook.FacebookBackend',
     'social.backends.contrib.github.GithubBackend'
@@ -148,6 +150,9 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = "/logout/"
 
 # More Login
 LOGIN_URL = '/login/'
+#GUARDIAN_RENDER_403 = True         #Render a contextful 403 page
+#GUARDIAN_TEMPLATE_403 = 403.html   #Template for rendering 403
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

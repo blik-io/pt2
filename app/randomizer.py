@@ -9,7 +9,7 @@ class Parameter():
     #The 720 are still very rude but they make the magic work.
     def __init__(self, typical_value, variance, drift=0):
         self.typical_value = typical_value
-        self.variance = variance /720
+        self.variance = variance
         self.drift = drift /720      #only chance if you expect drift
 
 class DeviceLatest():
@@ -72,15 +72,15 @@ def errorReporting(err):
 
 def randomizer_main():
     """USER VARIABLES"""
-    INTERVALL = 5
+    INTERVALL = 2
 
     loc_x = Parameter(typical_value=0, variance=10, drift=0)
     loc_y = Parameter(typical_value=0, variance=10, drift=0)
     loc_z = Parameter(typical_value=0, variance=10, drift=0)
     temp = Parameter(typical_value=20, variance=1, drift=0)
     hum = Parameter(typical_value=45, variance=4, drift=0)
-    bar = Parameter(typical_value=960, variance=10, drift=0)
-    lux = Parameter(typical_value=300, variance=200, drift=0)
+    bar = Parameter(typical_value=980, variance=10, drift=0)
+    lux = Parameter(typical_value=300, variance=75, drift=0)
 
     device_list = []
     for device in Device.objects.all():
@@ -89,7 +89,7 @@ def randomizer_main():
     device_latest_list = []
     for index in device_list:
         device_latest_list.append(DeviceLatest(device_id=index, time_stamp=0, loc_x=loc_x.typical_value, loc_y=loc_y.typical_value, loc_z=loc_z.typical_value, temp=temp.typical_value, hum=hum.typical_value, bar=bar.typical_value, lux=lux.typical_value))
-    print(device_latest_list)
+
     try:
         #for i in range(1,10):
         while True:
@@ -106,7 +106,7 @@ def randomizer_main():
             cyclecount(INTERVALL)
 
     except (KeyboardInterrupt, SystemExit):
-        print("Terminated by KeyboardInterrupt.")
+        print("\nTerminated by KeyboardInterrupt.")
     except Excepkn.efneftion as err:
         errorReporting(err)
         print("error")

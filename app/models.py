@@ -17,7 +17,7 @@ class DataPoint(models.Model):
         def save(self, *args, **kwargs):
             device = Device.objects.get(id=self.device_id)
             device.current_time_stamp = self.time_stamp
-            device.current_luc = self.loc
+            device.current_loc = self.loc
             device.current_temp = self.temp
             device.current_hum = self.hum
             device.current_bar = self.bar
